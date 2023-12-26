@@ -3,14 +3,16 @@ package praktikum;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Random;
+
 import static org.junit.Assert.assertEquals;
 
 public class BunTest {
-
+    private static Random random = new Random();
     private Bun bun;
     private final String ANY_NAME_BUN = "anyName";
-    private final float ANY_PRICE_BUN = 100;
-    private final float CALCULATION_DEVIATION = 0.01F;
+    private final float ANY_PRICE_BUN = random.nextFloat();
+    private final float CALCULATION_DEVIATION = 0.001F;
 
     @Before
     public void setUp() {
