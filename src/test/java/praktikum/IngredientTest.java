@@ -28,17 +28,17 @@ public class IngredientTest {
     }
 
     @Test
-    public void getPrice() {
+    public void getPriceRandomPriceReturnCorrectPrice() {
         assertEquals("цена не совпадает", ANY_PRICE_INGREDIENT, ingredient.getPrice(), CALCULATION_DEVIATION);
     }
 
     @Test
-    public void getName() {
+    public void getNameRandomNameReturnCorrectName() {
         assertEquals("имя не совпадает",ANY_NAME_INGREDIENT, ingredient.getName());
     }
 
     @Test
-    public void getType() {
+    public void getTypeSauceTypeReturnCorrectType() {
         assertEquals("соус не совпадает", ingredientType, ingredient.getType());
     }
 }
