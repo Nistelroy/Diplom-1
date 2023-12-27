@@ -39,26 +39,24 @@ public class BurgerGetReceiptParmTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {new IngredientType[]{IngredientType.FILLING}, "filling mocName", ingredientPrise },
+                {new IngredientType[]{IngredientType.FILLING, IngredientType.SAUCE}, "filling mocName", ingredientPrise * 2},
                 {new IngredientType[]{IngredientType.SAUCE}, "sauce mocName", ingredientPrise},
                 {new IngredientType[]{}, "", 0.0f}
         });
     }
 
     @Test
-    public void testGetReceipt() {
+    public void testGetReceiptContainsName() {
         for (IngredientType type : ingredientTypes) {
             Ingredient mockIngredient = mock(Ingredient.class);
             when(mockIngredient.getType()).thenReturn(type);
             when(mockIngredient.getName()).thenReturn("mocName");
             when(mockIngredient.getPrice()).thenReturn(ingredientPrise);
-
             burger.addIngredient(mockIngredient);
         }
         when(mocBun.getName()).thenReturn("mocBun");
 
         assertTrue(burger.getReceipt().contains(expectedReceipt));
-
         assertEquals(expectedPrise, burger.getPrice(), DataForTests.CALCULATION_DEVIATION);
     }
 }

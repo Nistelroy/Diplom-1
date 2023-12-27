@@ -16,6 +16,8 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
     public static final int FOUR_INGR = 4;
+    public static final int ZERO_INDEX = 0;
+    public static final int ONE_INDEX = 1;
     @Spy
     private Burger spyBurger = new Burger();
     @Mock
@@ -31,34 +33,34 @@ public class BurgerTest {
     }
 
     @Test
-    public void setBuns() {
+    public void testSetBunsMethodCall() {
         Mockito.verify(spyBurger).setBuns(mocBun);
     }
 
     @Test
-    public void addIngredient() {
+    public void testAddIngredientContainsInList() {
         spyBurger.addIngredient(mocIngredientOne);
-        assertTrue(spyBurger.ingredients.contains(mocIngredientOne));
+        assertTrue("Ингредиент добавился", spyBurger.ingredients.contains(mocIngredientOne));
     }
 
     @Test
-    public void removeIngredient() {
+    public void testRemoveIngredientNoContains() {
         spyBurger.addIngredient(mocIngredientOne);
-        spyBurger.removeIngredient(0);
-        assertFalse(spyBurger.ingredients.contains(mocIngredientOne));
+        spyBurger.removeIngredient(ZERO_INDEX);
+        assertFalse("Ингредиент не удалился", spyBurger.ingredients.contains(mocIngredientOne));
     }
 
     @Test
-    public void moveIngredient() {
+    public void testMoveIngredientSwitchIngredient() {
         spyBurger.addIngredient(mocIngredientOne);
         spyBurger.addIngredient(mocIngredientTwo);
-        spyBurger.moveIngredient(0, 1);
+        spyBurger.moveIngredient(ZERO_INDEX, ONE_INDEX);
 
-        assertEquals(spyBurger.ingredients.get(0), mocIngredientTwo);
+        assertEquals("Ингредиенты не поменялись местами", spyBurger.ingredients.get(0), mocIngredientTwo);
     }
 
     @Test
-    public void testGetPrice() {
+    public void testGetPriceSetPriceReturnCorrectPrice() {
         float anyPrice = DataForTests.ANY_PRICE;
         when(mocBun.getPrice()).thenReturn(anyPrice);
         when(mocIngredientOne.getPrice()).thenReturn(anyPrice);
@@ -66,8 +68,8 @@ public class BurgerTest {
 
         spyBurger.addIngredient(mocIngredientOne);
         spyBurger.addIngredient(mocIngredientTwo);
-
         float expectedPrice = anyPrice * FOUR_INGR;
-        assertEquals(expectedPrice, spyBurger.getPrice(), 0.001);
+
+        assertEquals("Цена не соответствует", expectedPrice, spyBurger.getPrice(), DataForTests.CALCULATION_DEVIATION);
     }
 }
