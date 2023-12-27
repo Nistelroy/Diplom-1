@@ -3,16 +3,12 @@ package praktikum;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Random;
-
 import static org.junit.Assert.assertEquals;
 
 public class BunTest {
-    private static Random random = new Random();
     private Bun bun;
-    private final String ANY_NAME_BUN = "anyName";
-    private final float ANY_PRICE_BUN = random.nextFloat();
-    private final float CALCULATION_DEVIATION = 0.001F;
+    private final String ANY_NAME_BUN = DataForTests.ANY_NAME;
+    private final float ANY_PRICE_BUN = DataForTests.ANY_PRICE;
 
     @Before
     public void setUp() {
@@ -28,6 +24,6 @@ public class BunTest {
     @Test
     public void testGetPriceMethodPriceCorrect() {
         float priseInBun = bun.getPrice();
-        assertEquals("Ошибка в цене булки", ANY_PRICE_BUN, priseInBun, CALCULATION_DEVIATION);
+        assertEquals("Ошибка в цене булки", ANY_PRICE_BUN, priseInBun, DataForTests.CALCULATION_DEVIATION);
     }
 }

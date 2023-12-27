@@ -1,44 +1,36 @@
 package praktikum;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Random;
-
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IngredientTest {
-    private static final Random random = new Random();
-    public static final String ANY_NAME_INGREDIENT = "Any Name";
-    public static final float ANY_PRICE_INGREDIENT = random.nextFloat();
+    public static final String ANY_NAME_INGREDIENT = DataForTests.ANY_NAME;
+    public static final float ANY_PRICE_INGREDIENT = DataForTests.ANY_PRICE;
     public static Ingredient ingredient;
-    private final float CALCULATION_DEVIATION = 0.001F;
-    private final IngredientType ingredientType = IngredientType.SAUCE; //использую живой класс т.к. нельзя мокать enum
+    private final IngredientType INGR_TYPE = IngredientType.SAUCE; //использую живой класс т.к. нельзя мокать enum
 
     @Before
     public void setUp() {
-        ingredient = new Ingredient(ingredientType, ANY_NAME_INGREDIENT, ANY_PRICE_INGREDIENT);
+        ingredient = new Ingredient(INGR_TYPE, ANY_NAME_INGREDIENT, ANY_PRICE_INGREDIENT);
     }
 
     @Test
     public void getPriceRandomPriceReturnCorrectPrice() {
-        assertEquals("цена не совпадает", ANY_PRICE_INGREDIENT, ingredient.getPrice(), CALCULATION_DEVIATION);
+        assertEquals("цена не совпадает", ANY_PRICE_INGREDIENT, ingredient.getPrice(), DataForTests.CALCULATION_DEVIATION);
     }
 
     @Test
     public void getNameRandomNameReturnCorrectName() {
-        assertEquals("имя не совпадает",ANY_NAME_INGREDIENT, ingredient.getName());
+        assertEquals("имя не совпадает", ANY_NAME_INGREDIENT, ingredient.getName());
     }
 
     @Test
     public void getTypeSauceTypeReturnCorrectType() {
-        assertEquals("соус не совпадает", ingredientType, ingredient.getType());
+        assertEquals("соус не совпадает", INGR_TYPE, ingredient.getType());
     }
 }

@@ -12,24 +12,24 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
 public class IngredientTypeParamTest {
     private IngredientType ingredientType;
-    private String expectedDescription;
+    private String expectedDescript;
 
     public IngredientTypeParamTest(IngredientType ingredientType, String expectedDescription) {
         this.ingredientType = ingredientType;
-        this.expectedDescription = expectedDescription;
+        this.expectedDescript = expectedDescription;
     }
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {IngredientType.SAUCE, "соус"},
-                {IngredientType.FILLING, "начинка"}
+                {IngredientType.FILLING, "начинка"},
         });
     }
 
     @Test
     public void testDescriptionGiveTypeReturnCorrectDescription() {
-        assertEquals(expectedDescription, getDescription(ingredientType));
+        assertEquals(expectedDescript, getDescription(ingredientType));
     }
 
     private String getDescription(IngredientType ingredientType) {
